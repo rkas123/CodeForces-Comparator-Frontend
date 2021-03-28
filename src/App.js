@@ -1,12 +1,14 @@
 import React from "react";
 import Header from "./components/Header/Header.js";
 import Tabs from "./components/Tabs/Tabs.js";
-
+import { BrowserRouter as Router } from "react-router-dom";
 function App() {
   return (
     <>
-      <Header />
-      <Tabs />
+      <Router>
+        <Header />
+        <Tabs />
+      </Router>
     </>
   );
 }

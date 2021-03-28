@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleTheme } from "../../actions/toggleTheme.js";
 import {
   Paper,
   Switch,
-  // AppBar,
   Toolbar,
   Typography,
   Button,
@@ -14,18 +13,29 @@ import {
 } from "@material-ui/core";
 import darkTheme from "../../themes/darkTheme.js";
 import lightTheme from "../../themes/lightTheme.js";
+import { useHistory, useLocation } from "react-router-dom";
 
 const Header = () => {
   const dispatch = useDispatch();
-
+  const location = useLocation();
+  const history = useHistory();
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const darkMode = useSelector((state) => state.theme);
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("profile")));
+  }, [location]);
   const themeToggle = () => {
     dispatch(toggleTheme());
   };
-  console.log("Header", darkMode);
+  const logout = () => {
+    dispatch({ type: "LOGOUT" });
+    history.push("/");
+    setUser(null);
+    console.log("logged Out");
+  };
+  console.log(user);
   return (
     <ThemeProvider theme={darkMode === 1 ? darkTheme : lightTheme}>
-      {console.log(darkMode)}
       <Paper square>
         <Toolbar position="static">
           <Grid
@@ -50,6 +60,9 @@ const Header = () => {
                 }
               ></FormControlLabel>
               <Button variant="outlined">Login</Button>
+              <Button variant="outlined" onClick={() => logout()}>
+                Logout
+              </Button>
             </Grid>
           </Grid>
         </Toolbar>

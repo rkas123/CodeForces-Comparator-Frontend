@@ -5,6 +5,7 @@ import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import { GoogleLogin } from "react-google-login";
 import {
   Avatar,
   Button,
@@ -15,6 +16,10 @@ import {
 } from "@material-ui/core";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import EmailIcon from "@material-ui/icons/Email";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -36,8 +41,35 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignUp(props) {
+  const dispatch = useDispatch();
+  const history = useHistory();
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(0);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const googleSuccess = async (res) => {
+    console.log("Login Success");
+    const result = res?.profileObj;
+    const token = res?.tokenId;
+    try {
+      dispatch({ type: "AUTH", data: { result, token } });
+      history.push("/");
+    } catch (error) {
+      console.log("error");
+      console.log(error);
+    }
+  };
+
+  const googleFailure = () => {
+    console.log("Google Login Failed");
+  };
+  //   console.log("history", history);
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -121,6 +153,7 @@ export default function SignUp(props) {
               />
             </Grid>
           </Grid>
+
           <Button
             type="submit"
             fullWidth
@@ -130,7 +163,22 @@ export default function SignUp(props) {
           >
             Sign Up
           </Button>
-
+          <GoogleLogin
+            clientId="1025904250795-56mla8n7de2o1shnj7jt7bsnqfnormsm.apps.googleusercontent.com"
+            render={(renderProps) => (
+              <Button
+                fullWidth
+                onClick={renderProps.onClick}
+                disabled={renderProps.disabled}
+                startIcon={<EmailIcon />}
+              >
+                Google Sign In
+              </Button>
+            )}
+            onSuccess={googleSuccess}
+            onFailure={googleFailure}
+            cookiePolicy="single_host_origin"
+          />
           <Grid item>
             <Link href="#" onClick={() => props.handleChange()} variant="body2">
               {"Already have an account? Sign In"}
