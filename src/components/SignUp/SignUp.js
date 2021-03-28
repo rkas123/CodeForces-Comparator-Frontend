@@ -19,7 +19,7 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import EmailIcon from "@material-ui/icons/Email";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-
+import { signUp } from "../../actions/auth.js";
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -69,7 +69,15 @@ export default function SignUp(props) {
   const googleFailure = () => {
     console.log("Google Login Failed");
   };
-  //   console.log("history", history);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(signUp(formData, history));
+  };
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -84,6 +92,7 @@ export default function SignUp(props) {
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
+                onChange={(e) => handleChange(e)}
                 autoComplete="fname"
                 name="firstName"
                 variant="outlined"
@@ -96,6 +105,7 @@ export default function SignUp(props) {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
+                onChange={(e) => handleChange(e)}
                 variant="outlined"
                 required
                 fullWidth
@@ -107,6 +117,7 @@ export default function SignUp(props) {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                onChange={(e) => handleChange(e)}
                 variant="outlined"
                 required
                 fullWidth
@@ -118,6 +129,7 @@ export default function SignUp(props) {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                onChange={(e) => handleChange(e)}
                 variant="outlined"
                 required
                 fullWidth
@@ -143,6 +155,7 @@ export default function SignUp(props) {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                onChange={(e) => handleChange(e)}
                 variant="outlined"
                 required
                 fullWidth
@@ -160,6 +173,7 @@ export default function SignUp(props) {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={(e) => handleSubmit(e)}
           >
             Sign Up
           </Button>
