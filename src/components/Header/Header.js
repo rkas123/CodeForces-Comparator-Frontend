@@ -18,14 +18,14 @@ import lightTheme from "../../themes/lightTheme.js";
 const Header = () => {
   const dispatch = useDispatch();
 
-  const darkMode = useSelector((state) => {
-    return state.theme;
-  });
+  const darkMode = useSelector((state) => state.theme);
   const themeToggle = () => {
     dispatch(toggleTheme());
   };
+  console.log("Header", darkMode);
   return (
-    <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+    <ThemeProvider theme={darkMode === 1 ? darkTheme : lightTheme}>
+      {console.log(darkMode)}
       <Paper square>
         <Toolbar position="static">
           <Grid
