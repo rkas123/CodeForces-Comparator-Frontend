@@ -17,9 +17,11 @@ import {
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import EmailIcon from "@material-ui/icons/Email";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { signUp } from "../../actions/auth.js";
+import { selectedTab } from "../../actions/selectedTab";
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -52,7 +54,7 @@ export default function SignUp(props) {
     password: "",
     confirmPassword: "",
   });
-
+  const value = useSelector((state) => state.tab);
   const googleSuccess = async (res) => {
     console.log("Login Success");
     const result = res?.profileObj;
@@ -77,6 +79,8 @@ export default function SignUp(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(signUp(formData, history));
+    history.push("/");
+    dispatch(selectedTab(value));
   };
   return (
     <Container component="main" maxWidth="xs">
@@ -194,7 +198,11 @@ export default function SignUp(props) {
             cookiePolicy="single_host_origin"
           />
           <Grid item>
-            <Link href="#" onClick={() => props.handleChange()} variant="body2">
+            <Link
+              href="/signin"
+              onClick={() => props.handleChange()}
+              variant="body2"
+            >
               {"Already have an account? Sign In"}
             </Link>
           </Grid>

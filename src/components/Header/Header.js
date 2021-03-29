@@ -36,7 +36,6 @@ const Header = () => {
     setUser(null);
     console.log("logged Out");
   };
-
   return (
     <ThemeProvider theme={darkMode === 1 ? darkTheme : lightTheme}>
       <Paper square>
