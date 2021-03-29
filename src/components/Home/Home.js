@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import SignUp from "../SignUp/SignUp.js";
-import SignIn from "../SignIn/SignIn.js";
 import Profile from "../Profile/Profile.js";
 import { Redirect } from "react-router-dom";
 

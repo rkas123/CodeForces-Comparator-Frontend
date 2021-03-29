@@ -32,7 +32,7 @@ const Header = () => {
 
   const logout = () => {
     dispatch({ type: "LOGOUT" });
-    history.push("/");
+    history.push("/signup");
     setUser(null);
     console.log("logged Out");
   };
@@ -62,7 +62,9 @@ const Header = () => {
                 }
               ></FormControlLabel>
               {user === null ? (
-                <Button variant="outlined">Login</Button>
+                <Button href="/signin" variant="outlined">
+                  Login
+                </Button>
               ) : (
                 <Button variant="outlined" onClick={() => logout()}>
                   Logout

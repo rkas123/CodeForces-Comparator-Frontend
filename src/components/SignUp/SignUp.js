@@ -17,10 +17,9 @@ import {
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import EmailIcon from "@material-ui/icons/Email";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { signUp } from "../../actions/auth.js";
-import { selectedTab } from "../../actions/selectedTab";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -54,7 +53,6 @@ export default function SignUp(props) {
     password: "",
     confirmPassword: "",
   });
-  const value = useSelector((state) => state.tab);
   const googleSuccess = async (res) => {
     console.log("Login Success");
     const result = res?.profileObj;
@@ -80,7 +78,6 @@ export default function SignUp(props) {
     e.preventDefault();
     dispatch(signUp(formData, history));
     history.push("/");
-    dispatch(selectedTab(value));
   };
   return (
     <Container component="main" maxWidth="xs">
@@ -165,8 +162,31 @@ export default function SignUp(props) {
                 fullWidth
                 name="confirmPassword"
                 label="Confirm Password"
-                type="text"
+                type="password"
                 id="confirmPassword"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                onChange={(e) => handleChange(e)}
+                variant="outlined"
+                required
+                fullWidth
+                name="codeforces"
+                label="Forces Id"
+                type="text"
+                id="codeforces"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                onChange={(e) => handleChange(e)}
+                variant="outlined"
+                fullWidth
+                name="codechef"
+                label="Chef Id"
+                type="text"
+                id="codechef"
               />
             </Grid>
           </Grid>

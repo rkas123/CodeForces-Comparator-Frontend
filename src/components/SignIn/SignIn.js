@@ -47,7 +47,6 @@ export default function SignIn(props) {
   const history = useHistory();
   const [formData, setFormData] = useState({ email: "", password: "" });
   const value = useSelector((state) => state.tab);
-  console.log(value);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
