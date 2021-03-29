@@ -15,6 +15,9 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { signIn } from "../../actions/auth.js";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -39,6 +42,19 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn(props) {
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(0);
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const [formData, setFormData] = useState({ email: "", password: "" });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(signIn(formData, history));
+  };
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -51,6 +67,7 @@ export default function SignIn(props) {
         </Typography>
         <form className={classes.form} noValidate>
           <TextField
+            onChange={(e) => handleChange(e)}
             variant="outlined"
             margin="normal"
             required
@@ -62,6 +79,7 @@ export default function SignIn(props) {
             autoFocus
           />
           <TextField
+            onChange={(e) => handleChange(e)}
             variant="outlined"
             margin="normal"
             required
@@ -89,6 +107,7 @@ export default function SignIn(props) {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={(e) => handleSubmit(e)}
           >
             Sign In
           </Button>
