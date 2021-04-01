@@ -57,7 +57,7 @@ const CardComponent = ({ data, dataset, codeForces }) => {
             <Typography variant="subtitle1">{data.rank}</Typography>
           </CardContent>
         </Card>
-        <Graph data={{ users: [data.name], datasets: [dataset] }} />
+        <Graph data={{ users: [data.name], datasets: [dataset] }} type={0} />
       </>
     );
   }

@@ -3,6 +3,7 @@ const createDataSet = (label, dataset) => {
   let i = 0,
     j = 0;
   let prev = 0;
+  // console.log(dataset);
   for (i = 0; i < label.length; i++) {
     if (j === dataset.length) {
       datas.push({ x: i + 1, y: prev });
@@ -24,7 +25,7 @@ const createDataSets = (label, dataset) => {
   var result = [];
   for (let i = 0; i < dataset.length; i++) {
     // console.log(dataset[i]);
-    result.push(createDataSet(label, dataset[i]));
+    result.push(createDataSet(label, dataset[i][0]));
   }
   // console.log("returning datasets");
   // console.log(result);
