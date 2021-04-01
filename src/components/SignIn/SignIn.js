@@ -15,9 +15,10 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
-import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { signIn } from "../../actions/auth.js";
+import { useSelector, useDispatch } from "react-redux";
+import { selectedTab } from "../../actions/selectedTab.js";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -45,6 +46,7 @@ export default function SignIn(props) {
   const dispatch = useDispatch();
   const history = useHistory();
   const [formData, setFormData] = useState({ email: "", password: "" });
+  const value = useSelector((state) => state.tab);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -53,6 +55,7 @@ export default function SignIn(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(signIn(formData, history));
+    dispatch(selectedTab(value));
   };
 
   return (
@@ -112,7 +115,11 @@ export default function SignIn(props) {
             Sign In
           </Button>
           <Grid item>
-            <Link href="#" onClick={() => props.handleChange()} variant="body2">
+            <Link
+              href="/signup"
+              onClick={() => props.handleChange()}
+              variant="body2"
+            >
               {"Create a New Account"}
             </Link>
           </Grid>

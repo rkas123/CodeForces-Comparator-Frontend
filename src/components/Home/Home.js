@@ -1,21 +1,15 @@
 import React, { useState } from "react";
-import SignUp from "../SignUp/SignUp.js";
-import SignIn from "../SignIn/SignIn.js";
+import Profile from "../Profile/Profile.js";
+import { Redirect } from "react-router-dom";
 
 const Home = () => {
-  const [sign, setSign] = useState(0);
-  const toggle = () => {
-    setSign((prevState) => (prevState + 1) % 2);
-  };
-  return (
-    <>
-      {sign === 0 ? (
-        <SignUp handleChange={toggle} />
-      ) : (
-        <SignIn handleChange={toggle} />
-      )}
-    </>
-  );
+  const userData = useState(JSON.parse(localStorage.getItem("profile")));
+
+  if (userData[0] !== null) {
+    return <Profile />;
+  } else {
+    return <Redirect to="/signin" />;
+  }
 };
 
 export default Home;

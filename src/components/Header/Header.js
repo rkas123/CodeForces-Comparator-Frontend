@@ -32,11 +32,10 @@ const Header = () => {
 
   const logout = () => {
     dispatch({ type: "LOGOUT" });
-    history.push("/");
+    history.push("/signup");
     setUser(null);
     console.log("logged Out");
   };
-
   return (
     <ThemeProvider theme={darkMode === 1 ? darkTheme : lightTheme}>
       <Paper square>
@@ -63,7 +62,9 @@ const Header = () => {
                 }
               ></FormControlLabel>
               {user === null ? (
-                <Button variant="outlined">Login</Button>
+                <Button href="/signin" variant="outlined">
+                  Login
+                </Button>
               ) : (
                 <Button variant="outlined" onClick={() => logout()}>
                   Logout
