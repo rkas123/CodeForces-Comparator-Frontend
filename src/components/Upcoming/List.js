@@ -43,14 +43,20 @@ const List = ({ Filter, data, date }) => {
   return (
     <Grid container spacing={3} justify="space-around">
       {temp.map((contest, index) => {
+        const startArray = contest.start.split("T");
+        const endArray = contest.end.split("T");
         return (
           <Grid key={index} item xs={12} sm={6} md={4} align="center">
             <Card variant="outlined" style={{ width: "80%" }}>
               <CardContent>
                 <Typography variant="h6">{contest.event}</Typography>
                 <Divider />
-                <Typography variant="body1">Start: {contest.start}</Typography>
-                <Typography variant="body1">End: {contest.end}</Typography>
+                <Typography variant="body1">
+                  Start: {`${startArray[0]} ${startArray[1]}`}
+                </Typography>
+                <Typography variant="body1">
+                  End: {`${endArray[0]} ${endArray[1]}`}
+                </Typography>
                 <Link component="a" variant="body2" href={contest.href}>
                   Link to Contest
                 </Link>
