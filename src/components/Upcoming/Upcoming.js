@@ -83,7 +83,7 @@ const Upcoming = () => {
     fetchData();
     comp = <CircularProgress />;
   } else {
-    comp = <List Filter={selectedPlatforms} list={list} date={selectedDate} />;
+    comp = <List Filter={selectedPlatforms} data={list} date={selectedDate} />;
   }
   return (
     <>

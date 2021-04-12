@@ -3,8 +3,8 @@ import {
   Card,
   CardContent,
   Typography,
-  Grid,
   Divider,
+  Grid,
   Link,
 } from "@material-ui/core";
 
@@ -26,41 +26,33 @@ const platforms = [
   { id: 117, name: "Binary Search" },
   { id: 120, name: "Quora" },
 ];
-const List = ({ Filter, list, date }) => {
+
+const List = ({ Filter, data, date }) => {
   const time = date.getTime();
-  const temp = list.filter((contest) => {
-    const contestTime = new Date(contest.end);
-    const ctime = contestTime.getTime();
-    if (ctime > time) return false;
-    for (let i = 0; i < platforms.length; i++) {
-      if (contest.resource.id === platforms[i].id && Filter[i] === 1)
+  const temp = data.filter((contest) => {
+    const contestDate = new Date(contest.end);
+    const contestTime = contestDate.getTime();
+    if (contestTime > time) return false;
+    for (let i = 0; i < Filter.length; i++) {
+      if (Filter[i] === 1 && platforms[i].id === contest.resource.id)
         return true;
     }
     return false;
   });
-  console.log(temp);
   return (
-    <Grid container spacing={4} justify="space-around" align="center">
+    <Grid container spacing={3} justify="space-around">
       {temp.map((contest, index) => {
-        const startArray = contest.start.split("T");
-        const endArray = contest.end.split("T");
         return (
-          <Grid item key={index} xs={12} sm={6} md={4}>
-            <Card style={{ width: "80%" }}>
+          <Grid key={index} item xs={12} sm={6} md={4} align="center">
+            <Card variant="outlined" style={{ width: "80%" }}>
               <CardContent>
                 <Typography variant="h6">{contest.event}</Typography>
                 <Divider />
-                <div style={{ marginTop: "10px" }}>
-                  <Typography>
-                    Start Time: {`${startArray[0]} ${startArray[1]}`}
-                  </Typography>
-                </div>
-                <div style={{ marginBottom: "10px" }}>
-                  <Typography>
-                    End Time: {`${endArray[0]} ${endArray[1]}`}
-                  </Typography>
-                </div>
-                <Link href={contest.href}>Contest Link</Link>
+                <Typography variant="body1">Start: {contest.start}</Typography>
+                <Typography variant="body1">End: {contest.end}</Typography>
+                <Link component="a" variant="body2" href={contest.href}>
+                  Link to Contest
+                </Link>
               </CardContent>
             </Card>
           </Grid>
