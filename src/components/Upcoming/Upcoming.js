@@ -10,15 +10,16 @@ import {
   Checkbox,
   FormControlLabel,
   Grid,
-  Button,
   Toolbar,
   IconButton,
   Typography,
   Drawer,
-  CssBaseline,
+  CircularProgress,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+import { fetchList } from "../../api/index.js";
+import List from "./List.js";
 
 const platforms = [
   { id: 1, name: "CodeForces" },
@@ -38,14 +39,20 @@ const platforms = [
   { id: 117, name: "Binary Search" },
   { id: 120, name: "Quora" },
 ];
+
+const currDate = new Date();
+const defaultTime = new Date(currDate.getTime() + 1728000000);
 //total 16 chosen
 const defaultFilter = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
 const Upcoming = () => {
   const [openFilter, setOpenFilter] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(defaultTime);
   const [selectedPlatforms, setSelectedPlatforms] = useState(defaultFilter);
+  const [dataFetch, setDataFetch] = useState(true);
+  const [list, setList] = useState(null);
   const handleDateChange = (date) => {
     setSelectedDate(date);
+    handleFilterClose();
   };
   const handleChange = (index) => {
     setSelectedPlatforms((prevState) => {
@@ -60,9 +67,24 @@ const Upcoming = () => {
   const handleFilterClose = () => {
     setOpenFilter(false);
   };
-  const applyChanges = () => {
-    handleFilterClose();
+  const fetchData = async () => {
+    try {
+      const data = await fetchList();
+      // console.log(data.data.data);
+      setList(data.data.data);
+      setDataFetch(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
+  let comp = {};
+  if (dataFetch === true) {
+    console.log("data fetch");
+    fetchData();
+    comp = <CircularProgress />;
+  } else {
+    comp = <List Filter={selectedPlatforms} list={list} date={selectedDate} />;
+  }
   return (
     <>
       <div>
@@ -139,13 +161,10 @@ const Upcoming = () => {
               marginTop: "20px",
               marginBottom: "20px",
             }}
-          >
-            <Button onClick={() => applyChanges()} variant="outlined">
-              Apply Changes
-            </Button>
-          </div>
+          ></div>
         </Drawer>
       </div>
+      {comp}
     </>
   );
 };

@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const API = axios.create({ baseURL: "http://localhost:5000" });
+const API = axios.create({
+  baseURL: "https://codeforces-compar.herokuapp.com/",
+});
 
 API.interceptors.request.use((req) => {
   if (localStorage.getItem("profile")) {
@@ -12,3 +14,4 @@ API.interceptors.request.use((req) => {
 });
 export const signIn = (userData) => API.post("/user/signIn", userData);
 export const signUp = (userData) => API.post("/user/signUp", userData);
+export const fetchList = () => API.get("/list");
