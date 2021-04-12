@@ -36,6 +36,7 @@ const platforms = [
   { id: 73, name: "HackerEarth" },
   { id: 90, name: "csacademy" },
   { id: 93, name: "AtCoder" },
+  { id: 102, name: "LeetCode" },
   { id: 117, name: "Binary Search" },
   { id: 120, name: "Quora" },
 ];
@@ -43,7 +44,7 @@ const platforms = [
 const currDate = new Date();
 const defaultTime = new Date(currDate.getTime() + 1728000000);
 //total 16 chosen
-const defaultFilter = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+const defaultFilter = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
 const Upcoming = () => {
   const [openFilter, setOpenFilter] = useState(false);
   const [selectedDate, setSelectedDate] = useState(defaultTime);

@@ -23,6 +23,7 @@ const platforms = [
   { id: 73, name: "HackerEarth" },
   { id: 90, name: "csacademy" },
   { id: 93, name: "AtCoder" },
+  { id: 102, name: "LeetCode" },
   { id: 117, name: "Binary Search" },
   { id: 120, name: "Quora" },
 ];
