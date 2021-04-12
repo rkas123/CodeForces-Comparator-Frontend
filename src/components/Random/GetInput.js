@@ -45,7 +45,43 @@ const GetInput = ({ inputs, platform }) => {
       datasets.push([data]);
     }
     // console.log("data fetch complete");
-    setState((prevState) => {
+    setState(() => {
+      return {
+        dataFetch: 1,
+        users: users,
+        datasets: datasets,
+      };
+    });
+  };
+
+  const fetchDataCC = async () => {
+    if (state.dataFetch === 1) return;
+    for (let i = 0; i < ids.length; i++) {
+      let contestData;
+      const url = `https://competitive-coding-api.herokuapp.com/api/codechef/${ids[i]}`;
+      try {
+        contestData = await axios.get(url);
+      } catch (error) {
+        console.log(error);
+      }
+      users.push(`${ids[i]}`);
+      const data = [];
+      contestData.data.contest_ratings.forEach((contest) => {
+        let time = Date.parse(contest.end_date);
+        var year = parseInt(contest.getyear);
+        var month = parseInt(contest.getmonth);
+        var day = parseInt(contest.getday);
+        if (month < 10) month = "0" + month;
+        if (day < 10) day = "0" + day;
+        data.push({
+          id: `${year}${month}${day}`,
+          rating: contest.rating,
+          time: time,
+        });
+      });
+      datasets.push([data]);
+    }
+    setState(() => {
       return {
         dataFetch: 1,
         users: users,
@@ -57,10 +93,11 @@ const GetInput = ({ inputs, platform }) => {
   if (!showGraph) {
     return (
       <>
-        <Grid container justify="center">
+        <Grid container justify="space-around" spacing="3">
           {indexes.map((index) => (
-            <Grid item key={index} xs={6} sm={4}>
+            <Grid item key={index} xs={6} sm={4} align="center">
               <TextField
+                style={{ width: "60%" }}
                 label={`Id${index + 1}`}
                 name={`${index}`}
                 onChange={(event) => onChangeHandler(event)}
@@ -68,17 +105,23 @@ const GetInput = ({ inputs, platform }) => {
             </Grid>
           ))}
         </Grid>
-        <Button onClick={() => setShowGraph(true)} variant="outlined">
-          Submit
-        </Button>
+        <div
+          style={{
+            marginTop: "20px",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <Button onClick={() => setShowGraph(true)} variant="outlined">
+            Submit
+          </Button>
+        </div>
       </>
     );
   } else {
-    fetchDataCF();
-    // console.log("Enter else");
-    // console.log(users, datasets);
+    if (platform === "codeforces") fetchDataCF();
+    else fetchDataCC();
     if (state.dataFetch === 1) {
-      // console.log(state.dataFetch);
       return (
         <Grid container align="center" justify="center">
           <Grid item xs={10}>
