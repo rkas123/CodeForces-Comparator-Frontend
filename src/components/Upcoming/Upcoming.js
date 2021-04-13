@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
-  KeyboardTimePicker,
 } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import {
@@ -143,7 +142,7 @@ const Upcoming = () => {
                   <FormControlLabel
                     control={
                       <Checkbox
-                        checked={selectedPlatforms[index] == 1 ? true : false}
+                        checked={selectedPlatforms[index] === 1 ? true : false}
                         onChange={() => handleChange(index)}
                         name={`${index}`}
                         color="primary"
