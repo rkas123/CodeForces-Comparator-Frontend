@@ -6,6 +6,8 @@
 - Compare Rating Graphs of upto 6 users.
 - Be updated with all the upcoming contests of popular Coding Contest Platforms.
 
+## <br/>
+
 ## Upcoming Features
 
 ### 1. **CF friends**
@@ -14,6 +16,21 @@
 
 * No need to remember their usernames on different platorms or stalk their LinkedIn profiles.
 
+## <br/>
+
 ## Easy Sign Up and Sign In
 
-<img src="">
+<img src="https://github.com/rkas123/CodeForces-Comparator-Frontend/blob/master/Screenshots/SignIn.PNG" style="width: 60%;margin:auto"/>
+
+## Profile Page
+
+<img src ="https://github.com/rkas123/CodeForces-Comparator-Frontend/blob/master/Screenshots/ProfilePage.PNG" style="width: 60%;margin:auto" />
+<img src ="https://github.com/rkas123/CodeForces-Comparator-Frontend/blob/master/Screenshots/ProfilePage2.PNG" style="width: 60%;margin:auto" />
+
+## Compare Rating Graphs
+
+<img src ="https://github.com/rkas123/CodeForces-Comparator-Frontend/blob/master/Screenshots/6UsersGraph.PNG" style="width: 60%;margin:auto" />
+
+<img src ="https://github.com/rkas123/CodeForces-Comparator-Frontend/blob/master/Screenshots/RandomUserGraph.PNG" style="width: 60%;margin:auto" />
+
+Compare Ratings of anyone in the World!
