@@ -22,10 +22,14 @@
 
 <img src="https://github.com/rkas123/CodeForces-Comparator-Frontend/blob/master/Screenshots/SignIn.PNG" style="width: 60%;margin:auto"/>
 
+## <br/>
+
 ## Profile Page
 
 <img src ="https://github.com/rkas123/CodeForces-Comparator-Frontend/blob/master/Screenshots/ProfilePage.PNG" style="width: 60%;margin:auto" />
 <img src ="https://github.com/rkas123/CodeForces-Comparator-Frontend/blob/master/Screenshots/ProfilePage2.PNG" style="width: 60%;margin:auto" />
+
+## <br/>
 
 ## Compare Rating Graphs
 
@@ -34,3 +38,15 @@
 <img src ="https://github.com/rkas123/CodeForces-Comparator-Frontend/blob/master/Screenshots/RandomUserGraph.PNG" style="width: 60%;margin:auto" />
 
 Compare Ratings of anyone in the World!
+
+## <br/>
+
+## Upcoming Contests
+
+<img src ="https://github.com/rkas123/CodeForces-Comparator-Frontend/blob/master/Screenshots/UpcomingContests.PNG" style="width: 60%;margin:auto" />
+
+## <br/>
+
+## Filter Contests by Time and Platform
+
+<img src ="https://github.com/rkas123/CodeForces-Comparator-Frontend/blob/master/Screenshots/Filter2.PNG" style="width: 60%;margin:auto" />
