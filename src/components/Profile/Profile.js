@@ -105,7 +105,7 @@ const Profile = () => {
         </Grid>
         <Grid container justify="space-around">
           {state?.codechefProfile !== null && (
-            <Grid item xs={6} sm={3}>
+            <Grid item xs={10} sm={7} md={3}>
               <CardComponent
                 data={state.codechefProfile}
                 dataset={state.codechefData}
@@ -113,7 +113,7 @@ const Profile = () => {
             </Grid>
           )}
           {state?.codeforcesProfile !== null && (
-            <Grid item xs={6} sm={3}>
+            <Grid item xs={10} sm={7} md={3}>
               <CardComponent
                 data={state.codeforcesProfile}
                 dataset={state.codeforcesData}
